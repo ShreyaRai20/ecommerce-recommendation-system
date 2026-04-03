@@ -1,14 +1,15 @@
-# E-commerce Recommendation System (Proof of Concept)
+# E-commerce Recommendation System (Deliverable 2 & 3)
 
 ## Overview
 
-This project implements a **Proof of Concept (PoC)** for an e-commerce recommendation system using fundamental data structures in Python.
+This project implements an **E-commerce Recommendation System** demonstrating both a **Proof-of-Concept (PoC)** and an **Optimized Scalable Version** using Python.
 
-The system demonstrates how efficient data structures can be used to:
+The system demonstrates how efficient data structures and optimizations can be used to:
 
 - Store user-product interactions
-- Model relationships
-- Generate Top-N recommendations
+- Model user-product relationships using graphs
+- Generate Top-N recommendations efficiently
+- Benchmark performance with larger datasets
 
 ---
 
@@ -27,27 +28,42 @@ The system demonstrates how efficient data structures can be used to:
 
 - Add users and product ratings
 - Represent relationships using graphs
-- Generate Top-N recommendations
+- Generate Top-N recommendations using heaps
 - Memory-efficient sparse storage
-- Modular and scalable design
+- Benchmark performance for scalability
+- Modular and maintainable design
 
 ---
 
 ## Project Structure
 
-```
+```text
 ecommerce-recommendation-system/
 │
 ├── src/
-│   ├── user_store.py
-│   ├── graph.py
-│   ├── heap_recommender.py
-│   ├── sparse_matrix.py
-│   └── main.py
+│   ├── user_store.py             # Deliverable 2 PoC user storage
+│   ├── graph.py                  # Deliverable 2 PoC graph
+│   ├── optimized_user_store.py   # Deliverable 3 optimized user storage
+│   ├── optimized_graph.py        # Deliverable 3 optimized graph
+│   ├── heap_recommender.py       # Top-N recommendation heap
+│   ├── sparse_matrix.py          # Sparse matrix for efficient storage
+│   ├── benchmark.py              # Benchmark and stress testing module
+│   └── main.py                   # Main script for D2 & D3
 │
 ├── tests/
-│   └── test_recommender.py
+│   ├── test_recommender.py       # Unit tests for recommendation correctness
+│   └── test_stress.py            # Stress tests and benchmark validation
 │
+├── results/                      # Stores generated performance graphs
+│   └── performance_graph.png
+│
+├── screenshots/                  # Screenshots for report
+│   ├── d2_output.png
+│   └── d3_performance.png
+│
+├── Project Phase 1 Deliverable 1.pdf
+├── Project Phase 2 Deliverable 2.pdf
+├── Project Phase 3 Deliverable 3.pdf
 ├── README.md
 └── requirements.txt
 ```
@@ -63,12 +79,26 @@ git clone https://github.com/YOUR_USERNAME/ecommerce-recommendation-system.git
 cd ecommerce-recommendation-system
 ```
 
-### 2. Run Application
+### 2. Install Dependencies
 
 ```bash
-cd src
-python main.py
+pip install -r requirements.txt
 ```
+
+> Ensure `matplotlib` is installed for plotting performance graphs.
+
+### 3. Run Application
+
+```bash
+python -m src.main
+```
+
+**Output**:
+
+- **Deliverable 2 (PoC)**: Top-N recommendations for sample users
+- **Deliverable 3 (Optimized)**:
+  - Insertion and Top-N recommendation times for multiple dataset sizes
+  - Performance graph saved at: `results/performance_graph.png`
 
 ---
 
@@ -78,35 +108,61 @@ python main.py
 pytest
 ```
 
+- Unit tests: `tests/test_recommender.py`
+- Stress tests / benchmark: `tests/test_stress.py`
+
 ---
 
 ## Example Output
 
+**Deliverable 2 (PoC)**
+
 ```
-Top Recommendations: ['P4', 'P3']
+=== PHASE 2: Proof-of-Concept (Deliverable 2) ===
+Top Recommendations (D2 PoC): ['P4', 'P3']
+```
+
+**Deliverable 3 (Optimized)**
+
+```
+Dataset size: 1000
+Insertion Time: 0.0005s, Top-N Time: 0.0000s
+Dataset size: 5000
+Insertion Time: 0.0027s, Top-N Time: 0.0000s
+...
+Performance graph saved: results/performance_graph.png
 ```
 
 ---
 
 ## Limitations
 
-- Uses dummy recommendation scores (no ML yet)
-- Not optimized for large-scale datasets
-- Basic sparse matrix implementation
+- Uses randomly generated ratings (no ML predictions yet)
+- Performance testing limited to synthetic datasets
+- Top-N recommendations do not yet incorporate collaborative filtering or ML
 
 ---
 
 ## Future Improvements
 
-- Implement collaborative filtering
-- Add machine learning models
-- Optimize for scalability
-- Use real-world datasets
-- Integrate APIs for real-time recommendations
+- Integrate collaborative filtering or ML-based recommendation models
+- Test with real-world e-commerce datasets
+- Further optimize memory usage for very large datasets
+- Implement API-based real-time recommendations
 
 ---
 
-## 👩Author
+## Screenshots
+
+**Deliverable 2 Output (PoC)**
+![D2 Output](screenshots/d2_output.png)
+
+**Deliverable 3 Performance Graph**
+![Performance Graph](results/performance_graph.png)
+
+---
+
+## 👩 Author
 
 **Shreya Rai**
 **Course Number: MSCS-532-B01**
@@ -115,8 +171,6 @@ Top Recommendations: ['P4', 'P3']
 
 ## References
 
-- Aggarwal, C. C. (2016). Recommender Systems
-- Koren et al. (2009). Matrix Factorization
-- He et al. (2017). Neural Collaborative Filtering
-
----
+- Aggarwal, C. C. (2016). _Recommender Systems_
+- Koren, Y., Bell, R., & Volinsky, C. (2009). _Matrix Factorization Techniques for Recommender Systems_
+- He, X., Liao, L., Zhang, H., Nie, L., Hu, X., & Chua, T. (2017). _Neural Collaborative Filtering_
